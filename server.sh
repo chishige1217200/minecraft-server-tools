@@ -18,7 +18,11 @@ WAIT=30
 if [ $# -eq 0 ] || [ "$1" = "start" ]; then
     echo "Server is starting..."
     cd $(dirname $0)
-    screen -UAmdS ${SCREEN_NAME} ${JAVA} -server -Xms${MEM} -Xmx${MEM} -jar ${JARFILE} nogui
+    if [ -f ${JAVA} ]; then
+        screen -UAmdS ${SCREEN_NAME} ${JAVA} -server -Xms${MEM} -Xmx${MEM} -jar ${JARFILE} nogui
+    else
+        echo "Java not found."
+    fi
 elif [ "$1" = "stop" ]; then
     echo "Server will stop in '${WAIT} seconds'..."
     screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "say '${WAIT}'秒後にサーバーを停止します\015"'
@@ -27,8 +31,12 @@ elif [ "$1" = "stop" ]; then
     echo "Server stopped."
 elif [ "$1" = "backup" ]; then
     echo "Backup"
-    DATE=$(date "+%Y-%m-%d_%H:%M:%S")
-    cp -r ${SERVER_DIR} ${BACKUP_DIR}/${DATE}
+    if [ -d ${SERVER_DIR} ] && [ -d ${BACKUP_DIR} ]; then
+        DATE=$(date "+%Y-%m-%d_%H:%M:%S")
+        cp -r ${SERVER_DIR} ${BACKUP_DIR}/${DATE}
+    else
+        echo "Directory not found."
+    fi
 #whitelist
 elif [ "$1" = "whitelist-on" ]; then
     screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "whitelist on\015"'
