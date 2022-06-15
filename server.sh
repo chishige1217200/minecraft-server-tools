@@ -71,6 +71,9 @@ elif [ "$1" = "ban-ip" ] && [ $# -eq 2 ]; then
     screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "ban-ip '$2'\015"'
 elif [ "$1" = "pardon-ip" ] && [ $# -eq 2 ]; then
     screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "pardon-ip '$2'\015"'
+#download server.jar(1.19)
+elif [ "$1" = "download" ]; then
+    curl -OL https://launcher.mojang.com/v1/objects/e00c4052dac1d59a1188b2aa9d5a87113aaf1122/server.jar
 #screen
 elif [ "$1" = "attach" ]; then
     screen -r ${SCREEN_NAME}
