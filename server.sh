@@ -14,6 +14,7 @@ MEM=4G
 #サーバ終了時の猶予時間を指定
 WAIT=30
 
+#general
 if [ $# -eq 0 ] || [ "$1" = "start" ]; then
     echo "Server is starting..."
     cd $(dirname $0)
@@ -28,4 +29,41 @@ elif [ "$1" = "backup" ]; then
     echo "Backup"
     DATE=$(date "+%Y-%m-%d_%H:%M:%S")
     cp -r ${SERVER_DIR} ${BACKUP_DIR}/${DATE}
+#whitelist
+elif [ "$1" = "whitelist-on" ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "whitelist on\015"'
+elif [ "$1" = "whitelist-off" ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "whitelist off\015"'
+elif [ "$1" = "whitelist-add" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "whitelist add '$2'\015"'
+elif [ "$1" = "whitelist-remove" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "whitelist remove '$2'\015"'
+elif [ "$1" = "whitelist-reload" ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "whitelist reload\015"'
+#operator
+elif [ "$1" = "op" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "op '$2'\015"'
+elif [ "$1" = "deop" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "deop '$2'\015"'
+#save
+elif [ "$1" = "save-on" ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "save-on\015"'
+elif [ "$1" = "save-off" ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "save-off\015"'
+elif [ "$1" = "save-all" ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "save-all\015"'
+#security
+elif [ "$1" = "kick" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "kick '$2'\015"'
+elif [ "$1" = "ban" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "ban '$2'\015"'
+elif [ "$1" = "pardon" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "pardon '$2'\015"'
+elif [ "$1" = "ban-ip" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "ban-ip '$2'\015"'
+elif [ "$1" = "pardon-ip" ] && [ $# -eq 2 ]; then
+    screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "pardon-ip '$2'\015"'
+#screen
+elif [ "$1" = "attach" ]; then
+    screen -r ${SCREEN_NAME}
 fi
