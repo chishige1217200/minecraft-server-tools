@@ -19,7 +19,11 @@ if [ $# -eq 0 ] || [ "$1" = "start" ]; then
     echo "Server is starting..."
     cd $(dirname $0)
     if [ -f ${JAVA} ]; then
-        screen -UAmdS ${SCREEN_NAME} ${JAVA} -server -Xms${MEM} -Xmx${MEM} -jar ${JARFILE} nogui
+        if [ -f ${JARFILE} ]; then
+            screen -UAmdS ${SCREEN_NAME} ${JAVA} -server -Xms${MEM} -Xmx${MEM} -jar ${JARFILE} nogui
+        else
+            echo "Server binary not found."
+        fi
     else
         echo "Java not found."
     fi
