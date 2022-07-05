@@ -1,5 +1,11 @@
 # minecraft-server-tools
-サーバの起動・終了・バックアップを1つのshで管理します．screenを使用します．
+サーバの起動・終了・バックアップを1つのshで管理します．
+
+## Requirements
+- bash
+- screen
+- cron
+- curl
 
 ## コマンド
 | コマンド         | 引数   | 使い方                             |
