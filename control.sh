@@ -14,10 +14,10 @@ MEM=4G
 #サーバ終了時の猶予時間を指定
 WAIT=30
 
+cd $(dirname $0)
 #general
 if [ $# -eq 0 ] || [ "$1" = "start" ]; then
     echo "Server is starting..."
-    cd $(dirname $0)
     if [ -f ${JAVA} ]; then
         if [ -f ${JARFILE} ]; then
             ./discordhook.sh start
