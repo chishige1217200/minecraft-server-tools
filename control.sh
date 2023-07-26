@@ -21,6 +21,7 @@ if [ $# -eq 0 ] || [ "$1" = "start" ]; then
     if [ -f ${JAVA} ]; then
         if [ -f ${JARFILE} ]; then
             ./discordhook.sh start
+            ./googlehook.sh start
             screen -UAmdS ${SCREEN_NAME} ${JAVA} -server -Xms${MEM} -Xmx${MEM} -jar ${JARFILE} nogui
         else
             echo "Server binary not found."
@@ -31,6 +32,7 @@ if [ $# -eq 0 ] || [ "$1" = "start" ]; then
 elif [ "$1" = "stop" ]; then
     echo "Server will stop in '${WAIT} seconds'..."
     ./discordhook.sh stop
+    ./googlehook.sh stop
     screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "say '${WAIT}'秒後にサーバーを停止します\015"'
     sleep $WAIT
     screen -p 0 -S ${SCREEN_NAME} -X eval 'stuff "stop\015"'
