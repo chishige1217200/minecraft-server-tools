@@ -1,0 +1,3 @@
+[Timer]
+OnCalendar=*-*-* 04:50:00
+Persistent=true

@@ -1,0 +1,17 @@
+[Unit]
+Description=Minecraft Server
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/opt/minecraft
+ExecStart=/usr/bin/tmux new-session -d -s mc java -jar server.jar nogui
+LimitNOFILE=65535
+
+Restart=always
+RestartSec=10
+
+SuccessExitStatus=0 1
+
+[Install]
+WantedBy=multi-user.target
