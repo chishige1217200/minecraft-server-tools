@@ -1,3 +1,6 @@
+[Unit]
+Description=Backup Minecraft
+
 [Service]
 Type=oneshot
 ExecStart=/opt/minecraft/backup.sh
