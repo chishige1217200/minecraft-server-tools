@@ -9,7 +9,7 @@ Group=minecraft
 WorkingDirectory=/opt/minecraft
 
 ExecStart=/bin/bash -c '/usr/bin/tmux new-session -d -s mc "java -jar server.jar nogui"'
-ExecStop=/usr/bin/tmux send-keys -t mcserver stop Enter
+ExecStop=/usr/bin/tmux send-keys -t mc stop Enter
 
 Restart=on-failure
 RestartSec=10
