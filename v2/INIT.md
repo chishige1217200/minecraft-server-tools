@@ -2,9 +2,9 @@
 ```sh
 systemctl daemon-reload
 
-systemctl enable minecraft-start.timer
-systemctl enable minecraft-stop.timer
-systemctl enable minecraft-backup.timer
+systemctl enable --now minecraft-start.timer
+systemctl enable --now minecraft-stop.timer
+systemctl enable --now minecraft-backup.timer
 ```
 
 確認
