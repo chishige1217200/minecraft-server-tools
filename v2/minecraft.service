@@ -8,8 +8,8 @@ User=minecraft
 Group=minecraft
 WorkingDirectory=/opt/minecraft
 
-ExecStart=/bin/bash -c '/usr/bin/tmux new-session -d -s mc "java -jar server.jar nogui"'
-ExecStop=/usr/bin/tmux send-keys -t mc stop Enter
+ExecStart=/bin/bash -c './control.sh start'
+ExecStop=/bin/bash -c './control.sh stop'
 
 Restart=on-failure
 RestartSec=10

@@ -3,6 +3,7 @@
 Debian/Ubuntuを対象システムとしています。
 
 ## Requirements
+- bash
 - java(パスが通っていること)
 - systemd
 - tmux
