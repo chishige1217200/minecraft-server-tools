@@ -55,7 +55,7 @@ backup() {
         tmux send-keys -t $SESSION 'say バックアップを開始します' Enter
         tmux send-keys -t $SESSION "save-off" Enter
         tmux send-keys -t $SESSION "save-all" Enter
-        sleep 5
+        sleep 10
     fi
 
     tar -czf $BACKUP_DIR/minecraft-$DATE.tar.gz \

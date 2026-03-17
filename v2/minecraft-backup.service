@@ -3,4 +3,8 @@ Description=Backup Minecraft
 
 [Service]
 Type=oneshot
-ExecStart=/opt/minecraft/backup.sh
+User=minecraft
+Group=minecraft
+WorkingDirectory=/opt/minecraft
+
+ExecStart=/bin/bash -c './control.sh backup'
