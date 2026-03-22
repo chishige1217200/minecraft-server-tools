@@ -3,8 +3,12 @@
 Debian/Ubuntuを対象システムとしています。
 
 ## Requirements
+下記のコマンドが使用できること。
 - bash
 - java(パスが通っていること)
 - systemd
 - tmux
-- rsync
+
+下記のディレクトリにminecraftユーザのRW権限があること。
+- /opt/minecraft
+- /var/backups/minecraft
