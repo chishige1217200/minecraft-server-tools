@@ -7,7 +7,7 @@
 SESSION="mcserver"
 #サーバとバックアップディレクトリの場所を指定します。DIRの末尾に/は必要ありません。
 SERVER_DIR="/opt/minecraft"
-BACKUP_DIR="/opt/minecraft/backups"
+BACKUP_DIR="/var/backups/minecraft"
 #.jarファイルの名前を指定します。
 JARFILE="server.jar"
 #サーバのメモリ割当を指定します。
@@ -59,7 +59,7 @@ backup() {
     fi
 
     tar -czf $BACKUP_DIR/minecraft-$DATE.tar.gz \
-        world world_nether world_the_end 2>/dev/null
+        . 2>/dev/null
 
     if tmux has-session -t $SESSION 2>/dev/null; then
         tmux send-keys -t $SESSION "save-on" Enter
