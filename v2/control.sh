@@ -39,6 +39,12 @@ stop() {
     tmux send-keys -t $SESSION 'say '$WAIT'秒後にサーバーを停止します。' Enter
     sleep $WAIT
     tmux send-keys -t $SESSION "stop" Enter
+
+    echo "サーバ停止待機中..."
+    while tmux has-session -t $SESSION 2>/dev/null; do
+        sleep 1
+    done
+    echo "サーバ停止完了"
 }
 
 attach() {
