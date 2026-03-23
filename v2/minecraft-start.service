@@ -1,6 +1,0 @@
-[Unit]
-Description=Start Minecraft
-
-[Service]
-Type=oneshot
-ExecStart=/bin/systemctl start minecraft
