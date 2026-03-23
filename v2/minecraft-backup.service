@@ -1,0 +1,10 @@
+[Unit]
+Description=Backup Minecraft
+
+[Service]
+Type=oneshot
+User=minecraft
+Group=minecraft
+WorkingDirectory=/opt/minecraft
+
+ExecStart=/bin/bash -c './control.sh backup'
