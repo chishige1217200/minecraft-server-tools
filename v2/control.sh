@@ -23,7 +23,7 @@ start() {
     fi
 
     if [ ! -f "$JARFILE" ]; then
-        echo "サーバJARファイルが見つかりません: $JARFILE"
+        echo "サーバJARファイルが見つかりません: $SERVER_DIR/$JARFILE"
         exit 1
     fi
 
