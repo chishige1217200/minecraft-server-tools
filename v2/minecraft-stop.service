@@ -1,6 +1,0 @@
-[Unit]
-Description=Stop Minecraft
-
-[Service]
-Type=oneshot
-ExecStart=/bin/systemctl stop minecraft
