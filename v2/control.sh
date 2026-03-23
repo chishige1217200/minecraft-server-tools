@@ -5,17 +5,14 @@
 
 #tmuxでの識別名を指定
 SESSION="mcserver"
-#サーバとバックアップディレクトリの場所を指定します。DIRの末尾に/は必要ありません。
+#サーバの場所を指定します。DIRの末尾に/は必要ありません。
 SERVER_DIR="/opt/minecraft"
-BACKUP_DIR="/var/backups/minecraft"
 #.jarファイルの名前を指定します。
 JARFILE="server.jar"
 #サーバのメモリ割当を指定します。
 MEM=4G
-#サーバ終了時の猶予時間を指定します。
+#サーバ終了時の猶予時間を指定します(60秒以上にする場合はserviceファイルも変更が必要)。
 WAIT=30
-
-DATE=$(date +"%Y%m%d-%H%M%S")
 
 cd $SERVER_DIR
 
@@ -48,28 +45,6 @@ attach() {
     tmux attach -t $SESSION
 }
 
-backup() {
-    mkdir -p $BACKUP_DIR
-
-    if tmux has-session -t $SESSION 2>/dev/null; then
-        tmux send-keys -t $SESSION 'say バックアップを開始します' Enter
-        tmux send-keys -t $SESSION "save-off" Enter
-        tmux send-keys -t $SESSION "save-all" Enter
-        sleep 10
-    fi
-
-    tar -czf $BACKUP_DIR/minecraft-$DATE.tar.gz \
-        . 2>/dev/null
-
-    if tmux has-session -t $SESSION 2>/dev/null; then
-        tmux send-keys -t $SESSION "save-on" Enter
-        tmux send-keys -t $SESSION "say バックアップが完了しました" Enter
-    fi
-
-    # 世代管理 (7日)
-    # find $BACKUP_DIR -type f -mtime +7 -delete
-}
-
 case "$1" in
 start)
     start
@@ -80,10 +55,7 @@ stop)
 attach)
     attach
     ;;
-backup)
-    backup
-    ;;
 *)
-    echo "Usage: $0 {start|stop|attach|backup}"
+    echo "Usage: $0 {start|stop|attach}"
     exit 1
 esac
