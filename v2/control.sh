@@ -28,6 +28,7 @@ start() {
     fi
 
     tmux new-session -d -s $SESSION "java -server -Xms$MEM -Xmx$MEM -jar $JARFILE nogui"
+    echo "サーバを起動しました。"
 }
 
 stop() {
@@ -44,7 +45,7 @@ stop() {
     while tmux has-session -t $SESSION 2>/dev/null; do
         sleep 1
     done
-    echo "サーバ停止完了"
+    echo "サーバを停止しました。"
 }
 
 attach() {
